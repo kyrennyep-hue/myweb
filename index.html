@@ -13,37 +13,76 @@
       font-family: Arial;
     }
 
-button {
-  background: blue;
-  color: white;
-  border: none;
-  padding: 20px 40px;   /* bigger size */
-  font-size: 22px;      /* bigger text */
-  border-radius: 10px;  /* smoother look */
-  cursor: pointer;
-  transition: 0.1s;
-}
-    button:active {
+    /* Main button */
+    #openBtn {
+      background: blue;
+      color: white;
+      border: none;
+      padding: 20px 40px;
+      font-size: 22px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+
+    #openBtn:active {
       background: white;
       color: blue;
+    }
+
+    /* Panel */
+    .panel {
+      display: none;
+      position: absolute;
+      background: pink;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .panel h1 {
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .panel button {
+      display: block;
+      width: 150px;
+      margin: 10px auto;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: blue;
+      color: black;
+      cursor: pointer;
     }
   </style>
 </head>
 
 <body>
-  <button onclick="clickEffect()">Open Panel</button>
+
+  <button id="openBtn" onclick="openPanel()">Open Panel</button>
+
+  <div class="panel" id="panel">
+    <h1>Welcome</h1>
+    <button>Login</button>
+    <button>Sign Up</button>
+  </div>
 
   <script>
-    function clickEffect() {
-      let btn = document.querySelector("button");
-      btn.style.background = "white";
-      btn.style.color = "blue";
+    function openPanel() {
+      let panel = document.getElementById("panel");
+      let btn = document.getElementById("openBtn");
 
-      setTimeout(() => {
-        btn.style.background = "blue";
-        btn.style.color = "white";
-      }, 120);
+      // show panel
+      panel.style.display = "block";
+
+      // hide main button
+      btn.style.display = "none";
     }
   </script>
+
 </body>
 </html>
