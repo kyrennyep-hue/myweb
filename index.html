@@ -18,14 +18,16 @@
       background: blue;
       color: white;
       border: none;
-      padding: 20px 40px;
-      font-size: 22px;
-      border-radius: 10px;
+      padding: 25px 50px;
+      font-size: 24px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: 0.1s;
+      transition: all 0.15s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
 
     #openBtn:active {
+      transform: scale(0.95);
       background: white;
       color: blue;
     }
@@ -35,10 +37,19 @@
       display: none;
       position: absolute;
       background: pink;
-      padding: 30px;
-      border-radius: 15px;
+      padding: 40px;
+      border-radius: 20px;
       text-align: center;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      width: 280px;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .panel.show {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .panel h1 {
@@ -46,26 +57,49 @@
       margin-bottom: 20px;
     }
 
+    /* Buttons inside panel */
     .panel button {
       display: block;
-      width: 150px;
-      margin: 10px auto;
-      padding: 12px;
-      font-size: 16px;
+      width: 180px;
+      margin: 12px auto;
+      padding: 14px;
+      font-size: 17px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       background: blue;
       color: black;
       cursor: pointer;
+      transition: all 0.15s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
+
+    .panel button:active {
+      transform: scale(0.95);
+      background: white;
+      color: blue;
+    }
+
+    /* Back button */
+    .back {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 60px;
+      padding: 6px;
+      font-size: 14px;
+    }
+
   </style>
 </head>
 
 <body>
 
+  <!-- Main Button -->
   <button id="openBtn" onclick="openPanel()">Open Panel</button>
 
+  <!-- Panel -->
   <div class="panel" id="panel">
+    <button class="back" onclick="closePanel()">←</button>
     <h1>Welcome</h1>
     <button>Login</button>
     <button>Sign Up</button>
@@ -76,11 +110,25 @@
       let panel = document.getElementById("panel");
       let btn = document.getElementById("openBtn");
 
-      // show panel
       panel.style.display = "block";
 
-      // hide main button
+      setTimeout(() => {
+        panel.classList.add("show");
+      }, 10);
+
       btn.style.display = "none";
+    }
+
+    function closePanel() {
+      let panel = document.getElementById("panel");
+      let btn = document.getElementById("openBtn");
+
+      panel.classList.remove("show");
+
+      setTimeout(() => {
+        panel.style.display = "none";
+        btn.style.display = "block";
+      }, 300);
     }
   </script>
 
