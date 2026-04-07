@@ -23,7 +23,6 @@
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.15s ease;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
 
     #openBtn:active {
@@ -32,7 +31,7 @@
       color: blue;
     }
 
-    /* Panel */
+    /* Panels */
     .panel {
       display: none;
       position: absolute;
@@ -40,11 +39,10 @@
       padding: 40px;
       border-radius: 20px;
       text-align: center;
-      width: 280px;
+      width: 300px;
       opacity: 0;
       transform: scale(0.9);
       transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
     .panel.show {
@@ -52,25 +50,47 @@
       transform: scale(1);
     }
 
-    .panel h1 {
+    h1 {
       color: white;
       margin-bottom: 20px;
     }
 
-    /* Buttons inside panel */
+    label {
+      color: black;
+      display: block;
+      margin-top: 10px;
+      text-align: left;
+    }
+
+    /* Input fields (GitHub-like dark) */
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: none;
+      background: #161b22; /* GitHub dark */
+      color: white;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #8b949e;
+    }
+
+    /* Buttons */
     .panel button {
       display: block;
       width: 180px;
       margin: 12px auto;
       padding: 14px;
-      font-size: 17px;
+      font-size: 16px;
       border: none;
       border-radius: 10px;
       background: blue;
       color: black;
       cursor: pointer;
       transition: all 0.15s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     .panel button:active {
@@ -79,14 +99,14 @@
       color: blue;
     }
 
-    /* Back button */
+    /* Back button (smaller now) */
     .back {
       position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 60px;
-      padding: 6px;
-      font-size: 14px;
+      top: 8px;
+      left: 8px;
+      width: 40px;
+      padding: 4px;
+      font-size: 12px;
     }
 
   </style>
@@ -95,39 +115,74 @@
 <body>
 
   <!-- Main Button -->
-  <button id="openBtn" onclick="openPanel()">Open Panel</button>
+  <button id="openBtn" onclick="openMain()">Open Panel</button>
 
-  <!-- Panel -->
-  <div class="panel" id="panel">
-    <button class="back" onclick="closePanel()">←</button>
+  <!-- MAIN PANEL -->
+  <div class="panel" id="mainPanel">
+    <button class="back" onclick="closeMain()">←</button>
     <h1>Welcome</h1>
     <button>Login</button>
-    <button>Sign Up</button>
+    <button onclick="openSignup()">Sign Up</button>
+  </div>
+
+  <!-- SIGNUP PANEL -->
+  <div class="panel" id="signupPanel">
+    <button class="back" onclick="backToMain()">←</button>
+    <h1>Sign Up</h1>
+
+    <label>Username:</label>
+    <input type="text" placeholder="Enter username">
+
+    <label>Password:</label>
+    <input type="password" placeholder="Enter password">
+
+    <button>Create Account</button>
   </div>
 
   <script>
-    function openPanel() {
-      let panel = document.getElementById("panel");
+    function openMain() {
+      let panel = document.getElementById("mainPanel");
       let btn = document.getElementById("openBtn");
 
       panel.style.display = "block";
-
-      setTimeout(() => {
-        panel.classList.add("show");
-      }, 10);
-
+      setTimeout(() => panel.classList.add("show"), 10);
       btn.style.display = "none";
     }
 
-    function closePanel() {
-      let panel = document.getElementById("panel");
+    function closeMain() {
+      let panel = document.getElementById("mainPanel");
       let btn = document.getElementById("openBtn");
 
       panel.classList.remove("show");
-
       setTimeout(() => {
         panel.style.display = "none";
         btn.style.display = "block";
+      }, 300);
+    }
+
+    function openSignup() {
+      let main = document.getElementById("mainPanel");
+      let signup = document.getElementById("signupPanel");
+
+      main.classList.remove("show");
+      setTimeout(() => {
+        main.style.display = "none";
+
+        signup.style.display = "block";
+        setTimeout(() => signup.classList.add("show"), 10);
+      }, 300);
+    }
+
+    function backToMain() {
+      let main = document.getElementById("mainPanel");
+      let signup = document.getElementById("signupPanel");
+
+      signup.classList.remove("show");
+      setTimeout(() => {
+        signup.style.display = "none";
+
+        main.style.display = "block";
+        setTimeout(() => main.classList.add("show"), 10);
       }, 300);
     }
   </script>
