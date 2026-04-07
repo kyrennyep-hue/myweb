@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Web</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, white, black);
+      font-family: Arial;
+    }
+
+button {
+  background: blue;
+  color: white;
+  border: none;
+  padding: 20px 40px;   /* bigger size */
+  font-size: 22px;      /* bigger text */
+  border-radius: 10px;  /* smoother look */
+  cursor: pointer;
+  transition: 0.1s;
+}
+    button:active {
+      background: white;
+      color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <button onclick="clickEffect()">Open Panel</button>
+
+  <script>
+    function clickEffect() {
+      let btn = document.querySelector("button");
+      btn.style.background = "white";
+      btn.style.color = "blue";
+
+      setTimeout(() => {
+        btn.style.background = "blue";
+        btn.style.color = "white";
+      }, 120);
+    }
+  </script>
+</body>
+</html>
